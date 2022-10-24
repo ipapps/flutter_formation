@@ -1,5 +1,6 @@
 void controlStructures() {
   bool condition = true;
+
   if (condition) {
   } else if (!condition) {
   } else {}

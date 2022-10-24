@@ -1,8 +1,16 @@
 import 'package:api_placeholder/api_placeholder.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_formation/nav/nav_app.dart';
 
 void main() {
-  runApp(const MyApp());
+  final chapter = const String.fromEnvironment("CHAPTER");
+  switch (chapter) {
+    case "NAV":
+      runApp(const NavApp());
+      break;
+    default:
+      runApp(const MyApp());
+  }
 }
 
 class MyApp extends StatelessWidget {

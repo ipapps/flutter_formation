@@ -1,6 +1,6 @@
 void nullSafety() {
   String toto;
-  //print(toto); DOES NOT COMPILE
+  //print(toto); // DOES NOT COMPILE
 
   String? titi;
   print(titi);
@@ -16,7 +16,7 @@ void nullSafety() {
   titi = null;
 
   print(toto.length);
-  //print(titi.length); DOES NOT COMPILE
+  //print(titi.length); // DOES NOT COMPILE
   print(titi?.length);
   print("Je préfère dire 0 que null donc la taille de titi est ${titi?.length ?? 0}");
 
