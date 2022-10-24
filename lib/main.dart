@@ -1,12 +1,29 @@
 import 'package:api_placeholder/api_placeholder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_formation/nav/nav_app.dart';
+import 'package:flutter_formation/widget/widgets.dart';
 
 void main() {
-  final chapter = const String.fromEnvironment("CHAPTER");
+  const chapter = String.fromEnvironment("CHAPTER");
   switch (chapter) {
     case "NAV":
       runApp(const NavApp());
+      break;
+    case "WIDGETS":
+      runApp(
+        MaterialApp(
+          theme: ThemeData(
+textTheme: TextTheme(
+  headline1: TextStyle()
+)
+          ),
+          home: Scaffold(
+            body: SafeArea(
+              child: Widgets(),
+            ),
+          ),
+        ),
+      );
       break;
     default:
       runApp(const MyApp());
