@@ -1,7 +1,11 @@
 import 'package:api_placeholder/api_placeholder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_formation/nav/nav_app.dart';
+import 'package:flutter_formation/webservices/webservices.dart';
+import 'package:flutter_formation/state_management/webservices_futurebuilder.dart';
 import 'package:flutter_formation/widget/widgets.dart';
+
+import 'state_management/webservices_blocbuilder.dart';
 
 void main() {
   const chapter = String.fromEnvironment("CHAPTER");
@@ -9,14 +13,17 @@ void main() {
     case "NAV":
       runApp(const NavApp());
       break;
+    case "WEBSERVICES":
+      runApp(const WebServicesApp());
+      break;
+    case "STATEMANAGEMENT":
+      runApp(WebServicesAppFutureBuilder());
+      //runApp(WebServicesAppBlocBuilder());
+      break;
     case "WIDGETS":
       runApp(
         MaterialApp(
-          theme: ThemeData(
-textTheme: TextTheme(
-  headline1: TextStyle()
-)
-          ),
+          theme: ThemeData(textTheme: TextTheme(headline1: TextStyle())),
           home: Scaffold(
             body: SafeArea(
               child: Widgets(),
