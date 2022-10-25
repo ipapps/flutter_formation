@@ -23,7 +23,11 @@ void main() {
     case "WIDGETS":
       runApp(
         MaterialApp(
-          theme: ThemeData(textTheme: TextTheme(headline1: TextStyle())),
+          theme: ThemeData(textTheme: const TextTheme(headline1: TextStyle(
+            fontSize: 36,
+            fontFamily: "Poppins",
+            color: Colors.black,
+          ))),
           home: Scaffold(
             body: SafeArea(
               child: Widgets(),

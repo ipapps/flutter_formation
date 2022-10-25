@@ -26,12 +26,9 @@ class _WidgetsState extends State<Widgets> {
             padding: const EdgeInsets.all(8.0),
             child: Column(
               children: [
-                const Text(
+                Text(
                   "Ma super appli",
-                  style: TextStyle(
-                    fontSize: 36,
-                    fontFamily: "Poppins",
-                  ),
+                  style: Theme.of(context).textTheme.headline1,
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
