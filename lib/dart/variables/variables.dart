@@ -1,4 +1,5 @@
 void variables() {
+
   var inferredType = 1;
   print(inferredType.runtimeType);
 
@@ -13,6 +14,7 @@ void variables() {
   print(noPrimitiveType.isEven);
 
   const finalVariable = "hello";
+
   //finalVariable = "goodbye"; DOES NOT COMPILE
 
   final String finalVariableToCompute;
@@ -25,5 +27,5 @@ void variables() {
   print(finalVariableToCompute); //The final variable 'finalVariableToCompute'
   // can't be read because it's potentially unassigned at this point.
 
-  //const String constString; DOES NOT COMPILE, MUST BE INSTANTIATED
+  //const String constString; //DOES NOT COMPILE, MUST BE INSTANTIATED
 }

@@ -11,7 +11,8 @@ class B extends A {
   B.withAllParameters(this.b, this.name, this.surname) : super("a");
 
   factory B.named(String name, String surname) {
-    return B.withAllParameters("b", name, surname);
+    String b = "a";
+    return B.withAllParameters(b, name, surname);
   }
 
   String giveString() => "toto";

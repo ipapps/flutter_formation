@@ -16,3 +16,8 @@ enum Planet {
     return Planet.values.indexOf(this) + 1;
   }
 }
+
+enum Basic {
+  hello,
+  goodbye,
+}

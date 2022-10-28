@@ -19,6 +19,6 @@ void main() {
   //functions();
   //extensions();
   //enums();
-  //asyncs();
+  asyncs();
   //classes();
 }

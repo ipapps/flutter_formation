@@ -2,7 +2,9 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_formation/state_management/user_repository.dart';
 import 'package:flutter_formation/state_management/users_bloc.dart';
+import 'package:flutter_formation/state_management/users_event.dart';
 import 'package:flutter_formation/state_management/users_state.dart';
 import 'package:flutter_formation/webservices/api.dart';
 import 'package:flutter_formation/webservices/api_response.dart';
@@ -17,33 +19,36 @@ class WebServicesAppBlocBuilder extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => UsersBloc()..loadUsers(),
+      create: (_) => UsersBloc(context.read<UsersRepository>())..add(LoadUsers()),
       child: Builder(builder: (context) {
         return MaterialApp(
           theme: ThemeData(
             primarySwatch: Colors.orange,
           ),
           home: Scaffold(
-            body: BlocBuilder<UsersBloc, UsersState>(builder: (context, state) {
-              if (state is LoadingUsers) {
-                return const SafeArea(child: Loader());
-              } else if (state is UsersFetched) {
-                return SafeArea(child: UserList(state.users));
-              } else if (state is UsersError) {
-                Future.microtask(
-                  () => ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                      content: Text(
-                        "Une erreur est survenue : ${state.error}",
+            body: BlocBuilder<UsersBloc, UsersState>(
+              builder: (context, state) {
+                switch (state.status) {
+                  case UserStatus.initial:
+                    return const SafeArea(child: UserListView([]));
+                  case UserStatus.loading:
+                    return const SafeArea(child: Loader());
+                  case UserStatus.error:
+                    Future.microtask(
+                      () => ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text(
+                            "Une erreur est survenue : ${state.error}",
+                          ),
+                        ),
                       ),
-                    ),
-                  ),
-                );
-                return const SafeArea(child: UserList([]));
-              } else {
-                return const SafeArea(child: UserList([]));
-              }
-            }),
+                    );
+                    return const SafeArea(child: UserListView([]));
+                  case UserStatus.done:
+                    return SafeArea(child: UserListView(state.users!));
+                }
+              },
+            ),
             appBar: AppBar(
               title: const Text("State management Bloc"),
             ),
@@ -52,7 +57,7 @@ class WebServicesAppBlocBuilder extends StatelessWidget {
               children: [
                 FloatingActionButton(
                   onPressed: () async {
-                    await context.read<UsersBloc>().fetchUsers();
+                    context.read<UsersBloc>().add(FetchUsers(wrong: false));
                   },
                   child: const Icon(Icons.refresh),
                 ),
@@ -61,7 +66,7 @@ class WebServicesAppBlocBuilder extends StatelessWidget {
                 ),
                 FloatingActionButton(
                   onPressed: () async {
-                    await context.read<UsersBloc>().fetchUsers(wrong: true);
+                    context.read<UsersBloc>().add(FetchUsers(wrong: true));
                   },
                   child: const Icon(Icons.clear),
                 ),

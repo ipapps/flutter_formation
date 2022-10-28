@@ -1,11 +1,12 @@
 void controlStructures() {
   bool condition = true;
 
-  if (condition) {
-  } else if (!condition) {
-  } else {}
-
-  print(condition ? "true" : "false");
+  final hello = """
+Un long string
+Avec des retours chariots
+  """;
+  print(hello);
+  print(condition ? 'true' : "false");
 
   printMyWord(String word) {
     switch (word) {
@@ -34,7 +35,7 @@ void controlStructures() {
   ];
 
   String concatenation = "";
-  for (final word in words) {
+  for (var word in words) {
     concatenation = concatenation + word;
   }
   print(concatenation);
@@ -47,9 +48,10 @@ void controlStructures() {
 
   concatenation = "";
   words.forEach((element) {
+    words[1] = "";
+    print(element);
     concatenation += element;
   });
-  print(concatenation);
 
   concatenation = "";
   while (words2.isNotEmpty) {
@@ -58,9 +60,6 @@ void controlStructures() {
   print(concatenation);
   print(words2.length);
 
-  words2 = words.map((e) => e.toUpperCase()).toList();
-  print(words2.join());
-
-  concatenation = words.reduce((value, element) => value + element);
-  print(concatenation);
+  final somme = [1, 3, 5].reduce((value, element) => value + element);
+  print(somme);
 }

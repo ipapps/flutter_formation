@@ -12,10 +12,12 @@ Route<dynamic> generateRoute(RouteSettings routeSettings) {
       break;
     case "detail":
       String text = "text";
-      if (dynamicArguments is String) {
-        text = dynamicArguments;
+      if (dynamicArguments is DetailArguments) {
+        text = dynamicArguments.myArgument;
+        route = Detail(arguments: dynamicArguments);
+      } else {
+        route = Screen404();
       }
-      route = Detail(text: text);
       break;
     default:
       route = const Screen404();

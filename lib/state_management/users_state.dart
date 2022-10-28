@@ -1,17 +1,24 @@
 import 'package:flutter_formation/webservices/user.dart';
 
-class UsersState {}
-
-class UsersFetched extends UsersState {
-  final List<User> users;
-
-  UsersFetched(this.users);
+enum UserStatus {
+  initial,
+  loading,
+  error,
+  done,
 }
 
-class UsersError extends UsersState {
+class UsersState {
+  final List<User>? users;
   final Exception? error;
+  final UserStatus status;
 
-  UsersError(this.error);
+  UsersState(this.users, this.error, this.status);
+
+  UsersState copyWith(
+    UserStatus status, {
+    List<User>? users,
+    Exception? error,
+  }) {
+    return UsersState(users, error, status);
+  }
 }
-
-class LoadingUsers extends UsersState {}

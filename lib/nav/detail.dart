@@ -1,28 +1,29 @@
 import 'package:flutter/material.dart';
 
-class Detail extends StatelessWidget {
-  final String text;
+class DetailArguments {
+  final String myArgument;
 
-  const Detail({Key? key, required this.text}) : super(key: key);
+  DetailArguments(this.myArgument);
+}
+
+class Detail extends StatelessWidget {
+  static const routeName = "detail";
+
+  final DetailArguments arguments;
+
+  const Detail({Key? key, required this.arguments}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    print(ModalRoute.of(context)?.settings);
     return Scaffold(
       appBar: AppBar(
-        // leading: IconButton(
-        //   icon: Icon(Icons.add),
-        //   onPressed: () {
-        //     Navigator.pop(context, "Je reviens du détail");
-        //   },
-        // ),
       ),
       body: SafeArea(
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text("Page de détails : $text"),
+              Text("Page de détails : ${arguments.myArgument}"),
               ElevatedButton(
                 onPressed: () {
                   Navigator.of(context).pop("Je reviens du détail");
@@ -43,7 +44,7 @@ class Detail extends StatelessWidget {
               ),
               ElevatedButton(
                 onPressed: () {
-                  Navigator.of(context).pushNamed("detail", arguments: "nouveau détail");
+                  Navigator.of(context).pushNamed("detail", arguments: DetailArguments("myArgument"));
                 },
                 child: Text("Même page de détail avec le texte \"nouveau détail\""),
               ),

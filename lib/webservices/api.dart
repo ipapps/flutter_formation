@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:flutter_formation/webservices/api_response.dart';
 import 'package:flutter_formation/webservices/user.dart';
@@ -16,6 +17,12 @@ class API {
   }
 
   Future<ApiResponse<List<User>>> _fetchUsers(String path) async {
+    final httpClient = http.Client();
+    httpClient.send(request)
+    
+    
+    
+    
     try {
       await Future.delayed(const Duration(seconds: 1));
       final apiResponse = await http.get(Uri.https(mockAPI, path));

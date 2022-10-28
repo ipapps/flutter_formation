@@ -3,6 +3,8 @@ import 'package:flutter_formation/nav/detail.dart';
 import 'package:flutter_formation/nav/home.dart';
 import 'package:flutter_formation/nav/inherited_widget.dart';
 import 'package:flutter_formation/nav/router.dart';
+import 'package:flutter_formation/nav/screen404.dart';
+import 'package:go_router/go_router.dart';
 
 class NavApp extends StatelessWidget {
   const NavApp({Key? key}) : super(key: key);
@@ -10,15 +12,17 @@ class NavApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // //FIRST IMPLEMENTATION
-    return TestInheritedWidget(
-      child: MaterialApp(
-        theme: ThemeData(primarySwatch: Colors.green),
-        home: const Home(),
-      ),
-    );
+    // return TestInheritedWidget(
+    //   testString: "intérieur",
+    //   child: MaterialApp(
+    //     theme: ThemeData(primarySwatch: Colors.green),
+    //     home: const Home(),
+    //   ),
+    // );
 
     //USING ROUTES
     // return TestInheritedWidget(
+    //   testString: '',
     //   child: MaterialApp(
     //     theme: ThemeData(primarySwatch: Colors.green),
     //     routes: {
@@ -30,16 +34,46 @@ class NavApp extends StatelessWidget {
 
     //USING ROUTER
     // return TestInheritedWidget(
-    //   child: MaterialApp(
+    //   testString: '',
+    //   child:
+    //
+    //
+    //   MaterialApp(
     //     theme: ThemeData(primarySwatch: Colors.green),
-    //     onGenerateRoute: generateRoute,
+    //     onGenerateRoute: (settings) {
+    //       final routes = {
+    //         "/": Home(),
+    //         "detail": Detail(
+    //           arguments: (settings.arguments as DetailArguments?) ?? DetailArguments("myArgument"),
+    //         ),
+    //       };
+    //       return MaterialPageRoute(
+    //         builder: (_) => routes[settings.name] ?? Screen404(),
+    //         settings: settings,
+    //       );
+    //     },
     //     onGenerateInitialRoutes: (_) => [
     //       MaterialPageRoute(
-    //         settings: const RouteSettings(name: "/"),
     //         builder: (_) => const Home(),
+    //         settings: RouteSettings(name: "/"),
     //       ),
     //     ],
     //   ),
     // );
+
+    // USING GO ROUTE
+    return TestInheritedWidget(
+      testString: '',
+      child: MaterialApp.router(
+        routerConfig: GoRouter(routes: [
+          GoRoute(
+              path: "/",
+              builder: (context, state) {
+                return Home();
+              })
+        ]),
+        theme: ThemeData(primarySwatch: Colors.green),
+      ),
+    );
   }
 }

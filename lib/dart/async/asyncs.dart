@@ -1,49 +1,26 @@
+import 'dart:async';
+
 void asyncs() async {
-  print(nowString());
-  print(laterString());
+  final stream = manageTime();
 
-  await wait();
+  stream.listen((event) {
+    print(event);
+  });
 
-  print(nowString());
-  laterString().then((value) => print(value));
+  final completer = Completer<String>();
 
-  await wait();
+  completer.complete("");
 
-  print(nowString());
-  realLaterString().then((value) => print(value));
+  completer.future;
+}
 
-  await Future.delayed(const Duration(seconds: 2));
-
-  print(nowString());
-  print(await easierLaterString());
-
-  await wait();
-
-  print(nowString());
-  print(await sameLaterString());
-
-  await wait();
-
-  print(nowString());
-  try {
-    print(await failingString());
-  } catch (exception) {
-    print(exception);
+Stream<String> manageTime() async* {
+  int i = 0;
+  while (i++ < 10) {
+    await wait();
+    yield DateTime.now().toIso8601String();
   }
-
-  await wait();
-  print(nowString());
-  failingString()
-      .then(
-    (value) => print(
-      value,
-    ),
-  )
-      .catchError(
-    (error) {
-      print(error);
-    },
-  );
+  return;
 }
 
 String nowString() {

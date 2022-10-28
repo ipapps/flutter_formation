@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_formation/webservices/user.dart';
 
-class UserList extends StatelessWidget {
+class UserListView extends StatelessWidget {
   final List<User> users;
 
-  const UserList(this.users, {Key? key}) : super(key: key);
+  const UserListView(this.users, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -18,6 +18,11 @@ class UserList extends StatelessWidget {
           return ListTile(
             title: Text(users[index].name),
             subtitle: Text(users[index].email),
+            leading: Icon(Icons.pedal_bike),
+            onTap: () {
+              print(users[index].name);
+            },
+            tileColor: index % 2 == 0 ? Colors.grey[200] : Colors.transparent,
           );
         },
         itemCount: users.length,

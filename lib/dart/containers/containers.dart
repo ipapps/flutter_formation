@@ -1,4 +1,6 @@
 void containers() {
+  final list45 = <int>[];
+
   List list = [1, "coucou"];
   //List<String> stringList = [1, 2]; DOES NOT COMPILE
   List<String> stringList = ["hello", "coucou", "holà", "👋"];
@@ -29,10 +31,12 @@ void containers() {
   print(thirdList);
   print(Set.of(thirdList));
 
-  final generatedList = List.generate(10, (index) => index);
+  final generatedList = List.generate(10, (index) => index * 2);
   print(generatedList);
 
-  Map<String, int> wordLengths = {};
+  Map<String, int> wordLengths = {
+    "String": 1,
+  };
 
   for (final element in thirdList) {
     wordLengths[element] = element.length;

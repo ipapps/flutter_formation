@@ -37,24 +37,37 @@ class _WebServicesState extends State<WebServicesAppFutureBuilder> {
                   case ConnectionState.done:
                     if (asyncSnapshot.hasData) {
                       if (asyncSnapshot.data!.response != null) {
-                        return UserList(asyncSnapshot.data!.response!);
+                        return UserListView(asyncSnapshot.data!.response!);
                       } else {
-                        Future.microtask(
-                          () => ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
-                              content: Text(
-                                "Une erreur est survenue : ${asyncSnapshot.data!.error!}",
-                              ),
-                            ),
-                          ),
+                        showDialog(
+                          context: context,
+                          barrierDismissible: false,
+                          builder: (_) {
+                            return AlertDialog(
+                              icon: Icon(Icons.bike_scooter),
+                              title: Text("Ca a cassé"),
+                              actions: [
+                                ElevatedButton(
+                                    onPressed: () {
+                                      Navigator.pop(context);
+                                    },
+                                    child: Text("Oui")),
+                                ElevatedButton(
+                                    onPressed: () {
+                                      Navigator.pop(context);
+                                    },
+                                    child: Text("Non")),
+                              ],
+                            );
+                          },
                         );
-                        return const UserList([]);
+                        return const UserListView([]);
                       }
                     } else {
-                      return const UserList([]);
+                      return const UserListView([]);
                     }
                   case ConnectionState.none:
-                    return const UserList([]);
+                    return const UserListView([]);
                 }
               },
             ),

@@ -3,9 +3,11 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_formation/webservices/api.dart';
 import 'package:flutter_formation/webservices/api_response.dart';
+import 'package:flutter_formation/webservices/hive_repository.dart';
 import 'package:flutter_formation/webservices/loader.dart';
 import 'package:flutter_formation/webservices/user.dart';
 import 'package:flutter_formation/webservices/user_list.dart';
+import 'package:hive/hive.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class WebServicesApp extends StatefulWidget {
@@ -47,7 +49,7 @@ class _WebServicesState extends State<WebServicesApp> {
       ),
       home: Scaffold(
         body: SafeArea(
-          child: _loading ? Loader() : UserList(_users),
+          child: _loading ? Loader() : UserListView(_users),
         ),
         appBar: AppBar(
           title: Text("Web services"),
@@ -78,7 +80,7 @@ class _WebServicesState extends State<WebServicesApp> {
     setState(() {
       _loading = true;
     });
-    _users = (await fetchFunction()).response ?? [];
+    _users = (await fetchFunction.call()).response ?? [];
     saveUsers();
     setState(() {
       _loading = false;
