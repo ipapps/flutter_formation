@@ -17,12 +17,6 @@ class API {
   }
 
   Future<ApiResponse<List<User>>> _fetchUsers(String path) async {
-    final httpClient = http.Client();
-    httpClient.send(request)
-    
-    
-    
-    
     try {
       await Future.delayed(const Duration(seconds: 1));
       final apiResponse = await http.get(Uri.https(mockAPI, path));
